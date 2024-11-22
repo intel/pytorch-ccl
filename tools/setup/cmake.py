@@ -182,6 +182,9 @@ class CMakeExtension(Extension):
     def _run(self, args, env):
         """Executes cmake with arguments and an environment."""
         command = [self._cmake_command] + args + [self.cmake_dir]
+        if command is None:
+            print('cmake not found, please install cmake before continuing...')
+            sys.exit(1)
         print(' '.join(command))
         check_call(command, cwd=self.build_dir, env=env)
 
